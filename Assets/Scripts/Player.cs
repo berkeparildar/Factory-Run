@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -6,6 +7,8 @@ public class Player : MonoBehaviour
     private Rigidbody _rigidbody;
     private float _targetX;
     public float smoothTime = 0.2f;
+    private bool _hasObstacleLeft;
+    private bool _hasObstacleRight;
 
     private void Start()
     {
@@ -13,10 +16,31 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void FixedUpdate()
+    {
+        if (Physics.Raycast(transform.position, Vector3.right, 1))
+        {
+            _hasObstacleRight = true;
+        }
+        else
+        {
+            _hasObstacleRight = false;
+        }
+        
+        if (Physics.Raycast(transform.position, Vector3.left, 1))
+        {
+            _hasObstacleLeft = true;
+        }
+        else
+        {
+            _hasObstacleLeft = false;
+        }
+    }
+
     private void Update()
     {
         var position = transform.position;
-        float newX = Mathf.Lerp(position.x, _targetX, smoothTime);
+        var newX = Mathf.Lerp(position.x, _targetX, smoothTime);
         position = new Vector3(newX, position.y, position.z);
         transform.position = position;
         transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
@@ -24,13 +48,15 @@ public class Player : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.up * 6, ForceMode.Impulse);
         }
-        else if (Input.GetKeyDown(KeyCode.A) && transform.position.x >= -1)
+        else if (Input.GetKeyDown(KeyCode.A) && transform.position.x >= -1 && !_hasObstacleLeft)
         {
             _targetX -= 1;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && transform.position.x <= 1)
+        else if (Input.GetKeyDown(KeyCode.D) && transform.position.x <= 1 && !_hasObstacleRight)
         {
             _targetX += 1;
         }
+        Debug.DrawRay(transform.position, Vector3.left, Color.red);
+        Debug.DrawRay(transform.position, Vector3.right, Color.green);
     }
 }

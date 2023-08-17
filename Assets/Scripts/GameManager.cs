@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
         {
             cooldown -= Time.deltaTime;
         }
-        Debug.Log(cooldown);
     }
 
     private void CheckPlayerPosition()

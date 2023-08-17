@@ -27,13 +27,15 @@ public class Platform : MonoBehaviour
 
     private static void CheckIfHigh()
     {
-        if (_highPlatformSpawning && !(GameManager.cooldown <= 0)) return;
-        var chanceToBeHigh = Random.Range(0, 5);
-        if (chanceToBeHigh != 4) return;
-        _highPlatformSpawning = true;
-        _numberOfHighPlatforms = Random.Range(6, 10);
-        // 0 Left, 1 Middle, 2 Right
-        _currentAxisOfHigh = Random.Range(0, 3);
+        if (!_highPlatformSpawning && GameManager.cooldown <= 0)
+        {
+            var chanceToBeHigh = Random.Range(0, 5);
+            if (chanceToBeHigh != 4) return;
+            _highPlatformSpawning = true;
+            _numberOfHighPlatforms = Random.Range(6, 10);
+            // 0 Left, 1 Middle, 2 Right
+            _currentAxisOfHigh = Random.Range(0, 3);
+        }
     }
 
     private void CheckObstacleSpawning()
@@ -47,7 +49,12 @@ public class Platform : MonoBehaviour
                 spots.Remove(_currentAxisOfHigh);
                 var coinToss = Random.Range(0, 2);
                 var boxXPos = spots[coinToss];
-                Instantiate(new Vector3(boxXPos, transform.position.y, transform.position.z));
+                Instantiate(box, new Vector3(boxXPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
+            }
+            else
+            {
+                var xPos = Random.Range(-1, 2);
+                Instantiate(box, new Vector3(xPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
             }
         }
     }
@@ -65,6 +72,7 @@ public class Platform : MonoBehaviour
                 transform.GetChild(_oldIndex).gameObject.SetActive(false);  
                 transform.GetChild(index).gameObject.SetActive(true);
                 _initAfterContinuation = false;
+                Debug.Log("Should Initialize two");
             }
             _numberOfHighPlatforms--;
             if (_numberOfHighPlatforms == 0)
