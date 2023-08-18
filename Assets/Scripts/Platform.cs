@@ -12,22 +12,16 @@ public class Platform : MonoBehaviour
     private static int _oldIndex;
     private static bool _initAfterContinuation;
     
-    // Start is called before the first frame update
     void Start()
     {
         CheckIfHigh();
         InitializeHighPlatforms();
         CheckObstacleSpawning();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    
     private static void CheckIfHigh()
     {
-        if (!_highPlatformSpawning && GameManager.cooldown <= 0)
+        if (!_highPlatformSpawning && GameManager.PlatformCooldown <= 0)
         {
             var chanceToBeHigh = Random.Range(0, 5);
             if (chanceToBeHigh != 4) return;
@@ -40,13 +34,13 @@ public class Platform : MonoBehaviour
 
     private void CheckObstacleSpawning()
     {
-        var chanceOfObstacles = Random.Range(0, 5);
-        if (chanceOfObstacles == 4)
+        var chanceOfObstacles = Random.Range(0, 4);
+        if (chanceOfObstacles == 3 && GameManager.BoxSpawnCooldown <= 0)
         {
             if (_highPlatformSpawning)
             {
                 var spots = new List<int>() { -1, 0, 1 };
-                spots.Remove(_currentAxisOfHigh);
+                spots.Remove(_currentAxisOfHigh - 1);
                 var coinToss = Random.Range(0, 2);
                 var boxXPos = spots[coinToss];
                 Instantiate(box, new Vector3(boxXPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
@@ -56,6 +50,7 @@ public class Platform : MonoBehaviour
                 var xPos = Random.Range(-1, 2);
                 Instantiate(box, new Vector3(xPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
             }
+            GameManager.BoxSpawnCooldown = 3;
         }
     }
 
@@ -101,7 +96,7 @@ public class Platform : MonoBehaviour
                 else
                 {
                     _highPlatformSpawning = false;
-                    GameManager.cooldown = Random.Range(6, 10);
+                    GameManager.PlatformCooldown = Random.Range(3, 6);
                 }
             }
         }
