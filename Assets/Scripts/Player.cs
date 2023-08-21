@@ -1,5 +1,6 @@
-using System;
+using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
@@ -7,21 +8,21 @@ public class Player : MonoBehaviour
     private Animator _modelAnimator;
     private BoxCollider _boxCollider;
     private float _speed;
-    private float _targetX;
-    private readonly float _smoothTime = 0.03f;
+    private bool _canTurnAgain;
     private bool _hasObstacleLeft;
     private bool _hasObstacleRight;
     private bool _isOnFloor;
+    private bool _isDucking;
     private static readonly int TurnRight = Animator.StringToHash("turnRight");
     private static readonly int TurnLeft = Animator.StringToHash("turnLeft");
     private static readonly int Jump = Animator.StringToHash("jump");
-    private static readonly int IsGrounded = Animator.StringToHash("isGrounded");
     private static readonly int Jumping = Animator.StringToHash("jumping");
     private static readonly int Duck1 = Animator.StringToHash("duck");
 
     private void Start()
     {
         _speed = 3;
+        _canTurnAgain = true;
         _rigidbody = GetComponent<Rigidbody>();
         _boxCollider = GetComponent<BoxCollider>();
         _modelAnimator = transform.GetChild(0).GetComponent<Animator>();
@@ -29,7 +30,14 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Physics.Raycast(transform.position, Vector3.right, 1))
+        var position = transform.position;
+        if (!_isDucking)
+        {
+            _isOnFloor = !Physics.Raycast(position, Vector3.down, 0.2f);
+            _modelAnimator.SetBool(Jumping, _isOnFloor);
+        }
+        var origin = new Vector3(position.x, position.y + 1, position.z);
+        if (Physics.Raycast(origin, Vector3.right, 1))
         {
             _hasObstacleRight = true;
         }
@@ -37,8 +45,8 @@ public class Player : MonoBehaviour
         {
             _hasObstacleRight = false;
         }
-        
-        if (Physics.Raycast(transform.position, Vector3.left, 1))
+
+        if (Physics.Raycast(origin, Vector3.left, 1))
         {
             _hasObstacleLeft = true;
         }
@@ -46,43 +54,13 @@ public class Player : MonoBehaviour
         {
             _hasObstacleLeft = false;
         }
-        
-        /*if (Physics.Raycast(transform.position, Vector3.down, out var ray, 0.05f))
-        {
-            if (ray.transform.CompareTag("Platform"))
-            {
-                Debug.Log("true");
-                _modelAnimator.SetTrigger(IsGrounded);
-            }
-        }*/
-        _modelAnimator.SetBool(Jumping,!Physics.Raycast(transform.position, Vector3.down, 0.2f));
     }
 
     private void Update()
     {
-        var position = transform.position;
-        var newX = Mathf.Lerp(position.x, _targetX, _smoothTime);
-        position = new Vector3(newX, position.y, position.z);
-        transform.position = position;
-        transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidbody.AddForce(Vector3.up * 6, ForceMode.Impulse);
-            _modelAnimator.SetTrigger(Jump);
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && transform.position.x > -0.99f)
-        {
-            _targetX -= 1;
-            _modelAnimator.SetTrigger(TurnLeft);
-        }
-        else if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 0.99f)
-        {
-            _targetX += 1;
-            _modelAnimator.SetTrigger(TurnRight);
-        }
-        Debug.DrawRay(transform.position, Vector3.down * 0.05f, Color.red);
-        Debug.DrawRay(transform.position, Vector3.right, Color.green);
-        //Duck();
+        Movement();
+        Debug.DrawRay(transform.position, Vector3.down, Color.red);
+        Debug.Log(_isOnFloor);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,12 +71,44 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Duck()
+    private void Movement()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _modelAnimator.SetTrigger(Duck1);
-            //_boxCollider.size = new Vector3(0.5f, 0.9f, 0.5f);
+            _rigidbody.AddForce(Vector3.up * 6, ForceMode.Impulse);
         }
+        else if (Input.GetKeyDown(KeyCode.A) && !_hasObstacleLeft && _canTurnAgain && !_isOnFloor)
+        {
+            _canTurnAgain = false;
+            transform.DOMoveX(-1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
+            ;
+            _modelAnimator.SetTrigger(TurnLeft);
+        }
+        else if (Input.GetKeyDown(KeyCode.D) && !_hasObstacleRight && _canTurnAgain && !_isOnFloor)
+        {
+            _canTurnAgain = false;
+            transform.DOMoveX(1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
+            _modelAnimator.SetTrigger(TurnRight);
+        }
+        else if (Input.GetKeyDown(KeyCode.S) && !_isOnFloor && _canTurnAgain)
+        {
+            StartCoroutine(Duck());
+        }
+    }
+
+    private IEnumerator Duck()
+    {
+        //_modelAnimator.SetTrigger(Duck1);
+        _isDucking = true;
+        var currentSize = _boxCollider.size;
+        var currentCenter = _boxCollider.center;
+        _boxCollider.size = new Vector3(currentSize.x, 0.5f, currentSize.z);
+        _boxCollider.center = new Vector3(currentCenter.x, 0.25f, currentCenter.z);
+        yield return new WaitForSeconds(1.16f);
+        _boxCollider.size = currentSize;
+        _boxCollider.center = currentCenter;
+        _isDucking = false;
+        _isOnFloor = !Physics.Raycast(transform.position, Vector3.down, 0.2f);
     }
 }

@@ -40,26 +40,33 @@ public class Platform : MonoBehaviour
         var chanceOfObstacles = Random.Range(0, 4);
         if (chanceOfObstacles == 3 && GameManager.BoxSpawnCooldown <= 0)
         {
+            var boxOrTunnel = Random.Range(0, 2);
             if (_highPlatformSpawning)
             {
                 var spots = new List<int>() { -1, 0, 1 };
                 spots.Remove(_currentAxisOfHigh - 1);
                 var coinToss = Random.Range(0, 2);
                 var boxXPos = spots[coinToss];
-                var boxOrTunnel = Random.Range(0, 2);
                 if (boxOrTunnel == 1)
                 {
                     Instantiate(box, new Vector3(boxXPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
                 }
                 else
                 {
-                    Instantiate(tunnel, new Vector3(boxXPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
+                    Instantiate(tunnel, new Vector3(boxXPos, transform.position.y, transform.position.z), Quaternion.identity);
                 }
             }
             else
             {
                 var xPos = Random.Range(-1, 2);
-                Instantiate(box, new Vector3(xPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
+                if (boxOrTunnel == 1)
+                {
+                    Instantiate(box, new Vector3(xPos, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(tunnel, new Vector3(xPos, transform.position.y, transform.position.z), Quaternion.identity);
+                }
             }
             GameManager.BoxSpawnCooldown = 3;
         }
