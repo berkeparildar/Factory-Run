@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Platform
   - Obstacle
+  - Tunnel
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Platform
   - Water
   - UI
   - 

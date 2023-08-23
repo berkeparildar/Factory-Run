@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +5,8 @@ public class GameManager : MonoBehaviour
     
     public static float PlatformCooldown;
     public static float BoxSpawnCooldown;
+    public static int Coins;
+    public GameObject endWall;
     [SerializeField] private GameObject platform;
     [SerializeField] private Player player;
     private static int _lastAddedPosition;
@@ -20,7 +20,19 @@ public class GameManager : MonoBehaviour
         BoxSpawnCooldown = 0;
         _playerTargetPosition = 3;
         _lastAddedPosition = 12;
-        for (int i = 0; i < 20; i++)
+       InitializeFirstPlatforms();
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        CheckPlayerPosition();
+        CheckCoolDowns();
+    }
+
+    private void InitializeFirstPlatforms()
+    {
+        for (int i = 0; i < 50; i++)
         {
             var generatedPlatform = Instantiate(platform, new Vector3(0, 0, _lastAddedPosition), Quaternion.identity);
             generatedPlatform.transform.SetParent(platformContainer.transform);
@@ -28,10 +40,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    private void Update()
+    private static void CheckCoolDowns()
     {
-        CheckPlayerPosition();
         if (PlatformCooldown > 0)
         {
             PlatformCooldown -= Time.deltaTime;
@@ -57,6 +67,7 @@ public class GameManager : MonoBehaviour
         var generatedPlatform = Instantiate(platform, new Vector3(0, 0, _lastAddedPosition), Quaternion.identity);
         generatedPlatform.transform.SetParent(platformContainer.transform);
         _lastAddedPosition += 3;
+        endWall.transform.position = (new Vector3(0, 2, generatedPlatform.transform.position.z + 1));
         Destroy(platformContainer.transform.GetChild(0).gameObject);
     }
 }

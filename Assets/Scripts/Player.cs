@@ -6,37 +6,33 @@ public class Player : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private Animator _modelAnimator;
-    private BoxCollider _boxCollider;
     private float _speed;
     private bool _canTurnAgain;
     private bool _hasObstacleLeft;
     private bool _hasObstacleRight;
     private bool _isOnFloor;
-    private bool _isDucking;
-    private static readonly int TurnRight = Animator.StringToHash("turnRight");
-    private static readonly int TurnLeft = Animator.StringToHash("turnLeft");
-    private static readonly int Jump = Animator.StringToHash("jump");
+    private static readonly int Right = Animator.StringToHash("turnRight");
+    private static readonly int Left = Animator.StringToHash("turnLeft");
     private static readonly int Jumping = Animator.StringToHash("jumping");
     private static readonly int Duck1 = Animator.StringToHash("duck");
+    private static readonly int Die = Animator.StringToHash("die");
 
     private void Start()
     {
-        _speed = 3;
+        _speed = 4.5f;
         _canTurnAgain = true;
         _rigidbody = GetComponent<Rigidbody>();
-        _boxCollider = GetComponent<BoxCollider>();
         _modelAnimator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
         var position = transform.position;
-        if (!_isDucking)
-        {
-            _isOnFloor = !Physics.Raycast(position, Vector3.down, 0.2f);
-            _modelAnimator.SetBool(Jumping, _isOnFloor);
-        }
+        _isOnFloor = !Physics.Raycast(position, Vector3.down, 0.2f);
+        _modelAnimator.SetBool(Jumping, _isOnFloor);
+
         var origin = new Vector3(position.x, position.y + 1, position.z);
+        
         if (Physics.Raycast(origin, Vector3.right, 1))
         {
             _hasObstacleRight = true;
@@ -59,37 +55,31 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Movement();
-        Debug.DrawRay(transform.position, Vector3.down, Color.red);
-        Debug.Log(_isOnFloor);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Obstacle"))
+        if (other.CompareTag("Obstacle") || other.CompareTag("Tunnel"))
         {
             _speed = 0;
+            _modelAnimator.SetTrigger(Die);
         }
     }
 
     private void Movement()
     {
         transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !_isOnFloor)
         {
-            _rigidbody.AddForce(Vector3.up * 6, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector3.up * 5.5f, ForceMode.Impulse);
         }
         else if (Input.GetKeyDown(KeyCode.A) && !_hasObstacleLeft && _canTurnAgain && !_isOnFloor)
         {
-            _canTurnAgain = false;
-            transform.DOMoveX(-1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
-            ;
-            _modelAnimator.SetTrigger(TurnLeft);
+           TurnLeft();
         }
         else if (Input.GetKeyDown(KeyCode.D) && !_hasObstacleRight && _canTurnAgain && !_isOnFloor)
         {
-            _canTurnAgain = false;
-            transform.DOMoveX(1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
-            _modelAnimator.SetTrigger(TurnRight);
+            TurnRight();
         }
         else if (Input.GetKeyDown(KeyCode.S) && !_isOnFloor && _canTurnAgain)
         {
@@ -97,18 +87,33 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void TurnLeft()
+    {
+        _canTurnAgain = false;
+        transform.DOMoveX(-1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
+        _modelAnimator.SetTrigger(Left);
+    }
+
+    private void TurnRight()
+    {
+        _canTurnAgain = false;
+        transform.DOMoveX(1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
+        _modelAnimator.SetTrigger(Right);
+    }
+
     private IEnumerator Duck()
     {
-        //_modelAnimator.SetTrigger(Duck1);
-        _isDucking = true;
-        var currentSize = _boxCollider.size;
-        var currentCenter = _boxCollider.center;
-        _boxCollider.size = new Vector3(currentSize.x, 0.5f, currentSize.z);
-        _boxCollider.center = new Vector3(currentCenter.x, 0.25f, currentCenter.z);
+        _modelAnimator.SetTrigger(Duck1);
+        var tunnels = GameObject.FindGameObjectsWithTag("Tunnel");
+        foreach (var tunnel in tunnels)
+        {
+            tunnel.GetComponent<BoxCollider>().enabled = false;
+        }
         yield return new WaitForSeconds(1.16f);
-        _boxCollider.size = currentSize;
-        _boxCollider.center = currentCenter;
-        _isDucking = false;
-        _isOnFloor = !Physics.Raycast(transform.position, Vector3.down, 0.2f);
+        foreach (var tunnel in tunnels)
+        {
+            tunnel.GetComponent<BoxCollider>().enabled = true;
+        }
+
     }
 }

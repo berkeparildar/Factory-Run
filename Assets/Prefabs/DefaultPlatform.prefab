@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8819957456049500378}
   - component: {fileID: 5263101620260336877}
   - component: {fileID: 2831680713561328087}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Middle
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 416028303364106502}
   - component: {fileID: 3797954094671911376}
   - component: {fileID: 8972279624832285242}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HitBox
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 8205110228443501297}
   - component: {fileID: 6440121519660138783}
   - component: {fileID: 561169504960677465}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Left
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 5145367419982237826}
   - component: {fileID: 8394483892721371234}
   - component: {fileID: 1182491764779624297}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightLong
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3492153447834022522}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Surroundings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 5433778099750763602}
   - component: {fileID: 8663915142497301057}
   - component: {fileID: 1740346081314233544}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Right
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 2658654551547052470}
   - component: {fileID: 1467207829918237580}
   - component: {fileID: 3011605824323226568}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftLong
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 1239725855654337148}
   - component: {fileID: 1203040771048030458}
   - component: {fileID: 4598435665228172516}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MiddleLong
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 6880382054480078628}
   - component: {fileID: 6271656765592698158}
   - component: {fileID: 3715471327971845318}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HitBox
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 282847516779167769}
   - component: {fileID: 7523099045725331274}
   - component: {fileID: 8823133453641704336}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HitBox
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -795,7 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7094119200847794727}
   - component: {fileID: 6606498988434111776}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DefaultPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,6 +838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   box: {fileID: 5946617272520200609, guid: 7972d97e15fac48d2aa1581bc85c04b4, type: 3}
   tunnel: {fileID: 7318339366434497860, guid: 8eea845546c4e4663a2b0c7cc0314fd6, type: 3}
+  coin: {fileID: 1498403948531744, guid: fa2c57d3f28a5e6419393e8bc3eeb32a, type: 3}
 --- !u!1001 &269796359267480866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -889,6 +890,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
       propertyPath: m_Name
       value: structure-short (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -956,6 +961,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1017,6 +1026,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1088,6 +1101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall-right
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e79c9439a240dee4f808e7d8cbaca5d5, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1150,13 +1167,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.495
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1230,13 +1259,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_Name
       value: conveyor-stripe-sides (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1306,6 +1347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1367,6 +1412,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1430,6 +1479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-short
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1491,6 +1544,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1558,13 +1615,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_Name
       value: conveyor-stripe-sides (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1634,6 +1703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1695,6 +1768,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1758,13 +1835,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.495
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1834,6 +1923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-short (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1900,6 +1993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1958,9 +2055,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2030,9 +2139,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_Name
       value: conveyor-stripe-sides
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2096,9 +2217,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_Name
       value: conveyor-stripe-sides (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2162,6 +2295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-short (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2224,13 +2361,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.495
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2300,13 +2449,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.495
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2372,9 +2533,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2444,6 +2617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2505,6 +2682,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
       propertyPath: m_Name
       value: structure-short (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2572,6 +2753,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2638,6 +2823,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2699,6 +2888,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2770,6 +2963,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall-left
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e79c9439a240dee4f808e7d8cbaca5d5, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2832,13 +3029,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.495
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2908,6 +3117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-short (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2974,6 +3187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3035,6 +3252,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3098,13 +3319,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.495
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3170,9 +3403,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3242,6 +3487,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-short
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3303,6 +3552,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
       propertyPath: m_Name
       value: structure-short
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3370,6 +3623,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3431,6 +3688,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3494,6 +3755,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-short
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3556,6 +3821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-tall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3614,9 +3883,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3682,9 +3963,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3753,6 +4046,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
       propertyPath: m_Name
       value: structure-tall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4417a5cfa52ea4e966745eb6aab713, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3828,6 +4125,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0c3e4dd456f07c440b7f46eea205a6d2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3889,6 +4190,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
       propertyPath: m_Name
       value: structure-short
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3956,13 +4261,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_Name
       value: conveyor-stripe-sides
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1819070693801239515, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4032,9 +4349,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
       propertyPath: m_Name
       value: conveyor-stripe-sides (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: d73db9ad95de10d4c80ccd3b16b1eea4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4111,6 +4440,10 @@ PrefabInstance:
       value: top
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 28ba4055c539201479ac5fc2429b3e06, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 28ba4055c539201479ac5fc2429b3e06, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -4176,6 +4509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: structure-short
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4234,9 +4571,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -910168554888888556, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
       propertyPath: m_Name
       value: conveyor-bars-sides (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 3e299ae705555374198611be92eba54e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4305,6 +4654,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
       propertyPath: m_Name
       value: structure-short (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d38d68f744116784eab68466e81bbfe8, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
