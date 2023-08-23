@@ -6,11 +6,13 @@ public class Player : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private Animator _modelAnimator;
+    private GameManager _gameManager;
     private float _speed;
     private bool _canTurnAgain;
     private bool _hasObstacleLeft;
     private bool _hasObstacleRight;
     private bool _isOnFloor;
+    public static bool IsAlive;
     private static readonly int Right = Animator.StringToHash("turnRight");
     private static readonly int Left = Animator.StringToHash("turnLeft");
     private static readonly int Jumping = Animator.StringToHash("jumping");
@@ -19,10 +21,12 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        IsAlive = true;
         _speed = 4.5f;
         _canTurnAgain = true;
         _rigidbody = GetComponent<Rigidbody>();
         _modelAnimator = transform.GetChild(0).GetComponent<Animator>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void FixedUpdate()
@@ -62,7 +66,9 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Obstacle") || other.CompareTag("Tunnel"))
         {
             _speed = 0;
+            IsAlive = false;
             _modelAnimator.SetTrigger(Die);
+            _gameManager.ShowHitUI();
         }
     }
 
