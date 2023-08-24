@@ -75,7 +75,7 @@ public class Platform : MonoBehaviour
                 {
                     var spawnedBox = Instantiate(box, new Vector3(boxXPos, position.y + 0.8f, position.z), Quaternion.identity);
                     spawnedBox.transform.SetParent(_obstacleContainer.transform);
-                    var spawnedCoin = Instantiate(coin, new Vector3(boxXPos, position.y + 3.4f, position.z),
+                    var spawnedCoin = Instantiate(coin, new Vector3(boxXPos, position.y + 3f, position.z),
                         Quaternion.identity);
                     spawnedCoin.transform.SetParent(_coinContainer.transform);
                 }
@@ -96,7 +96,7 @@ public class Platform : MonoBehaviour
                 {
                     var spawnedBox = Instantiate(box, new Vector3(xPos, transform.position.y + 0.8f, position.z), Quaternion.identity);
                     spawnedBox.transform.SetParent(_obstacleContainer.transform);
-                    var spawnedCoin = Instantiate(coin, new Vector3(xPos, position.y + 3.4f, position.z),
+                    var spawnedCoin = Instantiate(coin, new Vector3(xPos, position.y + 3f, position.z),
                         Quaternion.identity);
                     spawnedCoin.transform.SetParent(_coinContainer.transform);
                 }
