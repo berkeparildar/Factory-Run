@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -10,31 +8,32 @@ using Random = UnityEngine.Random;
 
 public class MenuEvents : MonoBehaviour
 {
-    public GameObject box;
-    public Animator menuAnimator;
-    public Animator canvasAnimator;
+    [SerializeField] private GameObject box;
+    [SerializeField] private Animator menuAnimator;
+    [SerializeField] private Animator canvasAnimator;
+    [SerializeField] private bool isInMenu;
+    [SerializeField] private GameObject wheel;
+    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private Button buyButton;
+    [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private Vector2 touchStartPos;
+    [SerializeField] private GameObject backgroundMusic;
+    private static int _modelIndex;
+    private static readonly int[] Prices = new[] { 100, 200, 300, 400, 500, 600, 700, 800 };
     private static readonly int BuyScreen = Animator.StringToHash("BuyScreen");
     private static readonly int Back = Animator.StringToHash("GoBack");
-    private static bool _isInMenu;
-    public GameObject wheel;
-    public static int ModelIndex;
-    public static int[] Prices = new[] { 100, 200, 300, 400, 500, 600, 700, 800 };
-    public static int Money;
-    public TextMeshProUGUI moneyText;
-    public Button buyButton;
-    public TextMeshProUGUI buttonText;
-    private Vector2 touchStartPos;
-    private const float minSwipeDistance = 50f;
+    private static int _money;
+    private const float MinSwipeDistance = 50f;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(BoxSpawner());
-        Money = PlayerPrefs.GetInt("Money", 0);
+        _money = PlayerPrefs.GetInt("Money", 0);
     }
 
     private void Update()
     {
-        moneyText.text = Money.ToString();
+        moneyText.text = _money.ToString();
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -47,19 +46,19 @@ public class MenuEvents : MonoBehaviour
                 case TouchPhase.Ended:
                     Vector2 swipeDelta = touch.position - touchStartPos;
 
-                    if (swipeDelta.magnitude > minSwipeDistance)
+                    if (swipeDelta.magnitude > MinSwipeDistance)
                     {
                         if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
                         {
                             if (swipeDelta.x > 0)
                             {
                                 wheel.transform.DORotate(new Vector3(0, 45, 0), 1).SetRelative();
-                                ModelIndex++;
+                                _modelIndex++;
                             }
                             else
                             {
                                 wheel.transform.DORotate(new Vector3(0, -45, 0), 1).SetRelative();
-                                ModelIndex--;
+                                _modelIndex--;
                             }
                         }
                     }
@@ -68,17 +67,17 @@ public class MenuEvents : MonoBehaviour
             }
         }
 
-        if (ModelIndex == 8)
+        if (_modelIndex == 8)
         {
-            ModelIndex = 0;
+            _modelIndex = 0;
         }
 
-        if (ModelIndex == -1)
+        if (_modelIndex == -1)
         {
-            ModelIndex = 7;
+            _modelIndex = 7;
         }
 
-        if (ModelIndex == PlayerPrefs.GetInt("Model"))
+        if (_modelIndex == PlayerPrefs.GetInt("Model"))
         {
             buyButton.interactable = false;
             buttonText.text = "OWNED";
@@ -89,7 +88,7 @@ public class MenuEvents : MonoBehaviour
             buttonText.text = "BUY";
         }
 
-        if (Money < Prices[ModelIndex])
+        if (_money < Prices[_modelIndex])
         {
             buyButton.interactable = false;
         }
@@ -102,9 +101,9 @@ public class MenuEvents : MonoBehaviour
 
     public void Buy()
     {
-        PlayerPrefs.SetInt("Model", ModelIndex);
-        Money -= Prices[ModelIndex];
-        PlayerPrefs.SetInt("Money", Money);
+        PlayerPrefs.SetInt("Model", _modelIndex);
+        _money -= Prices[_modelIndex];
+        PlayerPrefs.SetInt("Money", _money);
         buttonText.text = "OWNED";
         buyButton.interactable = false;
     }
@@ -130,13 +129,18 @@ public class MenuEvents : MonoBehaviour
     {
         menuAnimator.SetTrigger(BuyScreen);
         canvasAnimator.SetTrigger(BuyScreen);
-        _isInMenu = true;
+        isInMenu = true;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void GoBack()
     {
         menuAnimator.SetTrigger(Back);
         canvasAnimator.SetTrigger(Back);
-        _isInMenu = false;
+        isInMenu = false;
     }
 }

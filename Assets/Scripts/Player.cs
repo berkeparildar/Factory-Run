@@ -1,24 +1,27 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
-    private Animator _modelAnimator;
-    private GameManager _gameManager;
-    private float _speed;
-    private bool _canTurnAgain;
-    private bool _hasObstacleLeft;
-    private bool _hasObstacleRight;
-    private bool _isOnFloor;
+    [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private Animator modelAnimator;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private float speed;
+    [SerializeField] private bool canTurnAgain;
+    [SerializeField] private bool hasObstacleLeft;
+    [SerializeField] private bool hasObstacleRight;
+    [SerializeField] private bool isOnFloor;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource moveSource;
+    [SerializeField] private AudioClip death;
     public static bool IsAlive;
     private static readonly int Right = Animator.StringToHash("turnRight");
     private static readonly int Left = Animator.StringToHash("turnLeft");
     private static readonly int Jumping = Animator.StringToHash("jumping");
     private static readonly int Duck1 = Animator.StringToHash("duck");
     private static readonly int Die = Animator.StringToHash("die");
-
     private Vector2 _touchStartPos;
     private float _minSwipeDistance;
     private const float MinSwipeDistancePercent = 0.05f; // Adjust this value as needed
@@ -29,44 +32,51 @@ public class Player : MonoBehaviour
         float screenHeight = Screen.height;
         _minSwipeDistance = Mathf.Max(screenWidth, screenHeight) * MinSwipeDistancePercent;
         IsAlive = true;
-        _speed = 4.5f;
-        _canTurnAgain = true;
-        _rigidbody = GetComponent<Rigidbody>();
+        speed = 4.5f;
+        canTurnAgain = true;
+        rigidBody = GetComponent<Rigidbody>();
         for (int i = 0; i < 8; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
-
+        StartCoroutine(GameManager.ScoreRoutine());
         Debug.Log(PlayerPrefs.GetInt("Model"));
         transform.GetChild(PlayerPrefs.GetInt("Model", 0)).gameObject.SetActive(true);
-        _modelAnimator = transform.GetChild(PlayerPrefs.GetInt("Model", 0)).GetComponent<Animator>();
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        modelAnimator = transform.GetChild(PlayerPrefs.GetInt("Model", 0)).GetComponent<Animator>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void FixedUpdate()
     {
         var position = transform.position;
-        _isOnFloor = !Physics.Raycast(position, Vector3.down, 0.2f);
-        _modelAnimator.SetBool(Jumping, _isOnFloor);
-
+        isOnFloor = !Physics.Raycast(position, Vector3.down, 0.2f);
+        if (isOnFloor)
+        {
+            audioSource.Stop();
+        }
+        else if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+        modelAnimator.SetBool(Jumping, isOnFloor);
         var origin = new Vector3(position.x, position.y + 1, position.z);
 
         if (Physics.Raycast(origin, Vector3.right, 1))
         {
-            _hasObstacleRight = true;
+            hasObstacleRight = true;
         }
         else
         {
-            _hasObstacleRight = false;
+            hasObstacleRight = false;
         }
 
         if (Physics.Raycast(origin, Vector3.left, 1))
         {
-            _hasObstacleLeft = true;
+            hasObstacleLeft = true;
         }
         else
         {
-            _hasObstacleLeft = false;
+            hasObstacleLeft = false;
         }
     }
 
@@ -79,16 +89,19 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Obstacle") || other.CompareTag("Tunnel"))
         {
-            _speed = 0;
+            speed = 0;
+            audioSource.enabled = false;
+            moveSource.clip = death;
+            moveSource.Play();
             IsAlive = false;
-            _modelAnimator.SetTrigger(Die);
-            _gameManager.ShowHitUI();
+            modelAnimator.SetTrigger(Die);
+            gameManager.ShowHitUI();
         }
     }
     
     private void Movement()
     {
-        transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
+        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -104,22 +117,23 @@ public class Player : MonoBehaviour
                     {
                         if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
                         {
-                            if (swipeDelta.x > 0 && !_hasObstacleLeft && _canTurnAgain && !_isOnFloor)
+                            if (swipeDelta.x > 0 && !hasObstacleLeft && canTurnAgain && !isOnFloor)
                             {
                                 TurnRight();
                             }
-                            else if (swipeDelta.x < 0 && !_hasObstacleRight && _canTurnAgain && !_isOnFloor)
+                            else if (swipeDelta.x < 0 && !hasObstacleRight && canTurnAgain && !isOnFloor)
                             {
                                 TurnLeft();
                             }
                         }
                         else
                         {
-                            if (swipeDelta.y > 0 && !_isOnFloor)
+                            if (swipeDelta.y > 0 && !isOnFloor)
                             {
-                                _rigidbody.AddForce(Vector3.up * 5.5f, ForceMode.Impulse);
+                                moveSource.Play();
+                                rigidBody.AddForce(Vector3.up * 5.5f, ForceMode.Impulse);
                             }
-                            else if (swipeDelta.y < 0 && !_isOnFloor && _canTurnAgain)
+                            else if (swipeDelta.y < 0 && !isOnFloor && canTurnAgain)
                             {
                                 StartCoroutine(Duck());
                             }
@@ -133,21 +147,35 @@ public class Player : MonoBehaviour
 
     private void TurnLeft()
     {
-        _canTurnAgain = false;
-        transform.DOMoveX(-1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
-        _modelAnimator.SetTrigger(Left);
+        moveSource.Play();
+        audioSource.Stop();
+        canTurnAgain = false;
+        transform.DOMoveX(-1, 0.6f).SetRelative().OnComplete(() =>
+        {
+            canTurnAgain = true;
+            audioSource.Play();
+        });
+        modelAnimator.SetTrigger(Left);
     }
 
     private void TurnRight()
     {
-        _canTurnAgain = false;
-        transform.DOMoveX(1, 0.6f).SetRelative().OnComplete(() => { _canTurnAgain = true; });
-        _modelAnimator.SetTrigger(Right);
+        moveSource.Play();
+        canTurnAgain = false;
+        audioSource.Stop();
+        transform.DOMoveX(1, 0.6f).SetRelative().OnComplete(() =>
+        {
+            canTurnAgain = true;
+            audioSource.Play();
+        });
+        modelAnimator.SetTrigger(Right);
     }
 
     private IEnumerator Duck()
     {
-        _modelAnimator.SetTrigger(Duck1);
+        moveSource.Play();
+        modelAnimator.SetTrigger(Duck1);
+        audioSource.Stop();
         var tunnels = GameObject.FindGameObjectsWithTag("Tunnel");
         foreach (var tunnel in tunnels)
         {
@@ -155,6 +183,7 @@ public class Player : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.16f);
+        audioSource.Play();
         foreach (var tunnel in tunnels)
         {
             tunnel.GetComponent<BoxCollider>().enabled = true;

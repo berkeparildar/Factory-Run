@@ -23,6 +23,7 @@ public class Platform : MonoBehaviour
     
     void Start()
     {
+        Debug.Log(_highPlatformSpawning);
         _coinContainer = GameObject.Find("CoinContainer");
         _obstacleContainer = GameObject.Find("ObstacleContainer");
         _currentAxisOfObstacle = 10;
@@ -31,19 +32,22 @@ public class Platform : MonoBehaviour
         InitializeObstacles();
         CheckCoinSpawning();
         InitializeCoin();
+        
     }
     
     private static void CheckIfHigh()
     {
         if (!_highPlatformSpawning && GameManager.PlatformCooldown <= 0)
         {
-            var chanceToBeHigh = Random.Range(0, 2);
-            if (chanceToBeHigh != 1) return;
-            _highPlatformSpawning = true;
-            _numberOfHighPlatforms = Random.Range(6, 10);
-            _emptySpot = Random.Range(3, _numberOfHighPlatforms);
-            // 0 Left, 1 Middle, 2 Right
-            _currentAxisOfHigh = Random.Range(0, 3);
+            //var chanceToBeHigh = Random.Range(0, 6);
+            //if (chanceToBeHigh != 3)
+            //{
+                _highPlatformSpawning = true;
+                _numberOfHighPlatforms = Random.Range(6, 10);
+                _emptySpot = Random.Range(3, _numberOfHighPlatforms);
+                // 0 Left, 1 Middle, 2 Right
+                _currentAxisOfHigh = Random.Range(0, 3);
+            //}
         }
     }
 
@@ -110,8 +114,8 @@ public class Platform : MonoBehaviour
                 }
             }
             Destroy(_obstacleContainer.transform.GetChild(0).gameObject);
-            GameManager.BoxSpawnCooldown = 2;
-            GameManager.PlatformCooldown += 1;
+                GameManager.BoxSpawnCooldown += 2;
+                GameManager.PlatformCooldown += 0.5f;
         }
     }
 
@@ -165,8 +169,8 @@ public class Platform : MonoBehaviour
                 else
                 {
                     _highPlatformSpawning = false;
-                    GameManager.PlatformCooldown = Random.Range(2, 4);
-                    GameManager.BoxSpawnCooldown += 1;
+                        GameManager.PlatformCooldown += 0.5f;
+                        GameManager.BoxSpawnCooldown += 1;
                 }
             }
         }

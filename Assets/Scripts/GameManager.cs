@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
-    
     public static float PlatformCooldown;
     public static float BoxSpawnCooldown;
     public static int Coins;
@@ -26,26 +25,45 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalCoins;
     [SerializeField] private TextMeshProUGUI currentScore;
     [SerializeField] private TextMeshProUGUI allTimeScore;
+    [SerializeField] private GameObject targetObject;
+    [SerializeField] private GameObject ghostObject;
+    [SerializeField] private bool notLoaded;
     
-
-
     // Start is called before the first frame update
     private void Start()
     {
+        notLoaded = true;
+        targetObject = ghostObject;
         PlatformCooldown = 0;
         BoxSpawnCooldown = 0;
         _playerTargetPosition = 3;
-        _lastAddedPosition = 12;
-       InitializeFirstPlatforms();
-       StartCoroutine(ScoreRoutine());
+        _lastAddedPosition = 18;
+       //InitializeFirstPlatforms();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (notLoaded)
+        {
+            MoveGhost();
+        }
         CheckPlayerPosition();
         CheckCoolDowns();
         SetUIText();
+    }
+
+    public void OnLoaded()
+    {
+        player.gameObject.SetActive(true);
+        targetObject = player.gameObject;
+        _playerTargetPosition = 3;
+        notLoaded = false;
+    }
+
+    private void MoveGhost()
+    {
+        ghostObject.transform.Translate(Vector3.forward * 20 * Time.deltaTime);
     }
 
     private void InitializeFirstPlatforms()
@@ -54,6 +72,7 @@ public class GameManager : MonoBehaviour
         {
             var generatedPlatform = Instantiate(platform, new Vector3(0, 0, _lastAddedPosition), Quaternion.identity);
             generatedPlatform.transform.SetParent(platformContainer.transform);
+            //Debug.Log(PlatformCooldown);
             _lastAddedPosition += 3;
         }
     }
@@ -73,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckPlayerPosition()
     {
-        if (player.transform.position.z >= _playerTargetPosition)
+        if (targetObject.transform.position.z >= _playerTargetPosition)
         {
             GeneratePlatform();
             _playerTargetPosition += 3;
@@ -89,7 +108,7 @@ public class GameManager : MonoBehaviour
         Destroy(platformContainer.transform.GetChild(0).gameObject);
     }
 
-    private static IEnumerator ScoreRoutine()
+    public static IEnumerator ScoreRoutine()
     {
         while (Player.IsAlive)
         {
@@ -128,6 +147,8 @@ public class GameManager : MonoBehaviour
     {
         DOTween.KillAll();
         Debug.Log("pressed");
+        _score = 0;
+        Coins = 0;
         SceneManager.LoadScene(1);
     }
 

@@ -1,13 +1,16 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private GameObject _player;
+    [SerializeField] private AudioSource coinSound;
+    [SerializeField] private GameObject player;
     void Start()
     {
-        _player = GameObject.Find("Player");
         transform.DORotate(new Vector3(0, 360, 0), 1).SetRelative().SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+        coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>();
+        StartCoroutine(DestroyCoin());
     }
 
     private void Update()
@@ -17,22 +20,21 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == _player)
+        if (other.gameObject.CompareTag("Player"))
         {
             GameManager.Coins++;
+            coinSound.Play();
             DOTween.Kill(this.transform);
             DOTween.instance.DOKill();
             Destroy(gameObject);
         }
     }
 
-    private void DestroyCoin()
+    private IEnumerator DestroyCoin()
     {
-        if (transform.position.z + 5 <= _player.transform.position.z)
-        {
+        yield return new WaitForSeconds(30);
             DOTween.Kill(this.transform);
             DOTween.instance.DOKill();
             Destroy(gameObject);
-        }
     }
 }
