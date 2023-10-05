@@ -1,11 +1,11 @@
-# Gameplay Video
-[![Gameplay Preview](https://img.youtube.com/vi/oyamSiGUssk/0.jpg)](https://www.youtube.com/watch?v=oyamSiGUssk)
-
+[![Badge 1](media/pf.png)](https://berkeparildar.github.io/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Badge 2](media/ty.png)](https://youtu.be/oyamSiGUssk)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Badge 3](media/gp.png)](https://play.google.com/store/apps/details?id=com.bprldr.factoryrun)
 # Factory Run
 
 Factory Run is an exhilarating endless runner game that takes heavy inspiration from popular games like Subway Surfers. In Factory Run, players control a character who continuously runs forward through an industrial setting. The objective is to navigate between three columns or roads, avoiding obstacles and collecting coins to achieve the highest score possible. The game features dynamically changing platforms, with some segments randomly elevated, challenging players to jump to the higher platform. Gaps can also appear on elevated platforms, requiring precise jumps to avoid falling.
 
-<img src="media/play.gif" alt="Gameplay Screenshot" width="30%">
+<img src="media/play.gif" alt="Gameplay Screenshot" width="20%">
 
 
 ## How to Play
@@ -34,5 +34,3 @@ Factory Run is an exhilarating endless runner game that takes heavy inspiration 
 - Swipe right: Move character to the right lane.
 - Swipe up: Jump over obstacles on the ground.
 - Swipe down: Slide under obstacles on the ground.
-## Gameplay Video
-[![Gameplay Preview](https://img.youtube.com/vi/v6rg9e2535c/0.jpg)](https://www.youtube.com/watch?v=v6rg9e2535c)
